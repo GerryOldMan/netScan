@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block app_content %}	
+	<h1> Connected Devices </h1>
+	<table class='table'>
+		<tr>
+			<th>Host name</th>			
+			<th>Mac Address</th>
+			<th>IP address</th>
+			<th>First Seen</th>
+			<th>Last Seen</th>
+			<th>Vendor</th>
+			<th>Estimated Reboot</th>
+			<th>OS</th>
+			<th>Open Ports</th>
+		</tr>
+
+		{% for d in connected %}
+			<tr>
+				<td>{{ d.hostname }}</td>
+				<td>{{ d.mac }}</td>
+				<td>{{ d.ip }}</td>
+				<td>{{ d.first_seen.strftime('%d, %b, %Y, %H:%M') }}</td>
+				<td>{{ d.last_seen.strftime('%d, %b, %Y, %H:%M') }}</td>
+				<td>{{ d.vendor }}</td>
+				<td>{{ d.lastboot }}</td>
+				<td>{{ d.os }}</td>
+				<td>{{ d.ports }}</td>
+			</tr>
+		{% endfor %}
+	</table>
+	
+	<h1>Not Currently Connected</h1>
+	<table class='table'>
+		<tr>
+			<th>Host name</th>			
+			<th>Mac Address</th>
+			<th>IP address</th>
+			<th>First Seen</th>
+			<th>Last Seen</th>
+			<th>Vendor</th>
+			<th>Estimated Reboot</th>
+			<th>OS</th>
+			<th>Open Ports</th>
+
+		</tr>
+
+		{% for d in unconnected %}
+			<tr>
+				<td>{{ d.hostname }}</td>
+				<td>{{ d.mac }}</td>
+				<td>{{ d.ip }}</td>
+				<td>{{ d.first_seen.strftime('%d, %b, %Y, %H:%M') }}</td>
+				<td>{{ d.last_seen.strftime('%d, %b, %Y, %H:%M') }}</td>
+				<td>{{ d.vendor }}</td>
+				<td>{{ d.lastboot }}</td>
+				<td>{{ d.os }}</td>
+				<td>{{ d.ports }}</td>
+			</tr>
+		{% endfor %}
+
+{% endblock %}
